@@ -24,7 +24,7 @@ class MyApplication extends mwf.Application {
         console.log("MyApplication.oncreate(): initialising local database");
         // initialise the local database
         // TODO-REPEATED: add new entity types to the array of object store names
-        await GenericCRUDImplLocal.initialiseDB("mwftutdb", 1, ["MyEntity"]);
+        await GenericCRUDImplLocal.initialiseDB("mwftutdb", 1, ["MyEntity", "MediaItem"]);
 
         console.log("MyApplication.oncreate(): local database initialised");
 
@@ -40,7 +40,5 @@ class MyApplication extends mwf.Application {
     };
 }
 
-const application = new MyApplication();
-export {application as default}
 
 
