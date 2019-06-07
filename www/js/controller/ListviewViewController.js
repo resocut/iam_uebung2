@@ -28,9 +28,9 @@ export default class ListviewViewController extends mwf.ViewController {
 
         this.addNewMediaItem = null;
 
-        this.crudops.readAll().then((items) => {
-            this.initialiseListview(items);
-        });
+        // this.crudops.readAll().then((items) => {
+        //     this.initialiseListview(items);
+        // });
     }
 
     /*
