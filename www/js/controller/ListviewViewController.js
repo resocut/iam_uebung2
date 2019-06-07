@@ -101,7 +101,9 @@ export default class ListviewViewController extends mwf.ViewController {
     onListItemSelected(listitem, listview) {
         // TODO: implement how selection of listitem shall be handled
         super.onListItemMenuItemSelected(option, listitem, listview);
-        alert("Element " + listitem.title + listitem._id+ " wurde ausgewählt!");
+        // alert("Element " + listitem.title + listitem._id+ " wurde ausgewählt!");
+        this.nextView("mediaReadview",{item: listitem});
+
     }
 
     /*
@@ -126,15 +128,15 @@ export default class ListviewViewController extends mwf.ViewController {
     /*
      * for views that initiate transitions to other views
      */
-    async onReturnFromSubview(subviewid, returnValue, returnStatus) {
-        // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
+    async onReturnFromSubview(subviewid,returnValue,returnStatus) {
+        if (subviewid == "mediaReadview" && returnValue &&
+            returnValue.deletedItem) {
+            this.removeFromListview(returnValue.deletedItem._id);
+        }
     }
 
     deleteItem(item) {
-        // this.crudops.delete(item._id).then(() => {
-        //     this.removeFromListview(item._id);
-        // });
-        item.delete().then(() => {
+        item.delete(() => {
             this.removeFromListview(item._id);
         });
     }
