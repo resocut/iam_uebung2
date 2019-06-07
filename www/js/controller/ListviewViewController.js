@@ -3,15 +3,15 @@
  */
 import {mwf} from "../Main.js";
 import {entities} from "../Main.js";
-import {GenericCRUDImplLocal} from "../Main.js";
+// import {GenericCRUDImplLocal} from "../Main.js";
 
 export default class ListviewViewController extends mwf.ViewController {
 
     constructor() {
         super();
         this.resetDatabaseElement = null;
-        this.crudops =
-            GenericCRUDImplLocal.newInstance("MediaItem");
+        // this.crudops =
+        //     GenericCRUDImplLocal.newInstance("MediaItem");
 
 
 
@@ -44,12 +44,14 @@ export default class ListviewViewController extends mwf.ViewController {
 
         this.addNewMediaItemElement.onclick = (() => {
 
-            this.crudops.create(new entities.MediaItem("m","https://placeimg.com/100/100/city")).then((created) =>
-            {
-                this.addToListview(created);
-            }
+        //     this.crudops.create(new entities.MediaItem("m","https://placeimg.com/100/100/city")).then((created) =>
+        //     {
+        //         this.addToListview(created);
+        //     }
+        //
+        // );
 
-        );
+            this.createNewItem();
 
         });
 
@@ -64,11 +66,14 @@ export default class ListviewViewController extends mwf.ViewController {
             }
         });
 
-        this.crudops.readAll().then((items) => {
-            this.initialiseListview(items);
+        // this.crudops.readAll().then((items) => {
+        //     this.initialiseListview(items);
+        // });
+
+        entities.MediaItem.readAll().then((items) => {
+        this.initialiseListview(this.items);
         });
 
-        this.initialiseListview(this.items);
 
         // call the superclass once creation is done
         super.oncreate();
@@ -126,15 +131,29 @@ export default class ListviewViewController extends mwf.ViewController {
     }
 
     deleteItem(item) {
-        this.crudops.delete(item._id).then(() => {
+        // this.crudops.delete(item._id).then(() => {
+        //     this.removeFromListview(item._id);
+        // });
+        item.delete().then(() => {
             this.removeFromListview(item._id);
         });
     }
 
     editItem(item) {
         item.title = (item.title + item.title);
-        this.crudops.update(item._id,item).then(() => {
+        // this.crudops.update(item._id,item).then(() => {
+        //     this.updateInListview(item._id,item);
+        // });
+        item.update().then(() => {
             this.updateInListview(item._id,item);
+        });
+    }
+
+    createNewItem() {
+        var newItem = new
+        entities.MediaItem("m","https://placeimg.com/100/100/city");
+        newItem.create().then(() => {
+            this.addToListview(newItem);
         });
     }
 }
