@@ -1,1 +1,7 @@
 /* TODO: add any application specific styling here */
+
+/*not working as of now*/
+#mediaReadview img {
+    width: 100%;
+    max-width: 100%
+}
