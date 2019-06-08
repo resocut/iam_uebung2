@@ -39,21 +39,40 @@ export default class ListviewViewController extends mwf.ViewController {
     async oncreate() {
         // TODO: do databinding, set listeners, initialise the view
         //New element with plus Button
-        this.addNewMediaItemElement =
-            this.root.querySelector("#addNewMediaItem");
-
-        this.addNewMediaItemElement.onclick = (() => {
-
-        //     this.crudops.create(new entities.MediaItem("m","https://placeimg.com/100/100/city")).then((created) =>
-        //     {
-        //         this.addToListview(created);
-        //     }
+        // this.addNewMediaItemElement =
+        //     this.root.querySelector("#addNewMediaItem");
         //
+        // this.addNewMediaItemElement.onclick = (() => {
+        //
+        // //     this.crudops.create(new entities.MediaItem("m","https://placeimg.com/100/100/city")).then((created) =>
+        // //     {
+        // //         this.addToListview(created);
+        // //     }
+        // //
+        // // );
+        //
+        //     this.createNewItem();
+
+        // });
+
+        // this.addListener(new
+        // mwf.EventMatcher("crud","deleted","MediaItem"),((event) => {
+        //     this.removeFromListview(event.data);
+        //     })
         // );
 
-            this.createNewItem();
-
-        });
+        this.addListener(new mwf.EventMatcher("crud","created","MediaItem"),((event) =>
+        {
+            this.addToListview(event.data);
+        }));
+        this.addListener(new mwf.EventMatcher("crud","updated","MediaItem"),((event) =>
+        {
+            this.updateInListview(event.data._id,event.data);
+        }));
+        this.addListener(new mwf.EventMatcher("crud","deleted","MediaItem"),((event) =>
+        {
+            this.removeFromListview(event.data);
+        }));
 
         //Datenbank zurücksetzen
         this.resetDatabaseElement =
