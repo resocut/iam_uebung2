@@ -98,9 +98,9 @@ export default class ListviewViewController extends mwf.ViewController {
      * for views with listviews: react to the selection of a listitem
      * TODO: delete if no listview is used or if item selection is specified by targetview/targetaction
      */
-    onListItemSelected(listitem, listview) {
+    onListItemSelected(object, listview, listitem) {
         // TODO: implement how selection of listitem shall be handled
-        super.onListItemMenuItemSelected(option, listitem, listview);
+        super.onListItemMenuItemSelected(listitem, object, listview);
         alert("Element " + listitem.title + listitem._id+ " wurde ausgewählt!");
     }
 
