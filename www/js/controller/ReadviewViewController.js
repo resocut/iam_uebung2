@@ -8,7 +8,7 @@ export default class ReadviewViewController extends mwf.ViewController {
 
     constructor() {
         super();
-
+        this.viewProxy = null;
         console.log("ReadviewViewController()");
     }
 
@@ -17,7 +17,14 @@ export default class ReadviewViewController extends mwf.ViewController {
      */
     async oncreate() {
         // TODO: do databinding, set listeners, initialise the view
-
+        // var mediaItem = new entities.MediaItem("m","https://placeimg.com/300/400/music");
+        var mediaItem = this.args.item;
+        this.viewProxy = this.bindElement("mediaReadviewTemplate",{item: mediaItem},this.root).viewProxy;
+        this.viewProxy.bindAction("deleteItem",(() => {
+            mediaItem.delete().then(() => {
+                this.previousView();
+            })
+        }));
 
         // call the superclass once creation is done
         super.oncreate();
