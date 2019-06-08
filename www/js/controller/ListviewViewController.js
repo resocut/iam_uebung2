@@ -53,6 +53,11 @@ export default class ListviewViewController extends mwf.ViewController {
 
             this.createNewItem();
 
+            this.addListener(new
+            mwf.EventMatcher("crud","deleted","MediaItem"),((event) => {
+                    this.removeFromListview(event.data);
+                })
+            );
         });
 
         //Datenbank zurücksetzen
