@@ -53,11 +53,21 @@ export default class ListviewViewController extends mwf.ViewController {
 
             this.createNewItem();
 
-            this.addListener(new
-            mwf.EventMatcher("crud","deleted","MediaItem"),((event) => {
-                    this.removeFromListview(event.data);
-                })
-            );
+            // this.addListener(new
+            // mwf.EventMatcher("crud","deleted","MediaItem"),((event) => {
+            //         this.removeFromListview(event.data);
+            //     })
+            // );
+
+            this.addListener(new mwf.EventMatcher("crud","created","MediaItem"),((event) => {
+                this.addToListview(event.data);
+            }));
+            this.addListener(new mwf.EventMatcher("crud","updated","MediaItem"),((event) => {
+                this.updateInListview(event.data._id,event.data);
+            }));
+            this.addListener(new mwf.EventMatcher("crud","deleted","MediaItem"),((event) => {
+                this.removeFromListview(event.data);
+            }));
         });
 
         //Datenbank zurücksetzen
@@ -132,21 +142,21 @@ export default class ListviewViewController extends mwf.ViewController {
     /*
      * for views that initiate transitions to other views
      */
-    async onReturnFromSubview(subviewid, returnValue, returnStatus) {
-        // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
-        if (subviewid == "mediaReadview" && returnValue &&
-            returnValue.deletedItem) {
-            this.removeFromListview(returnValue.deletedItem._id);
-        }
-    }
+    // async onReturnFromSubview(subviewid, returnValue, returnStatus) {
+    //     // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
+    //     if (subviewid == "mediaReadview" && returnValue &&
+    //         returnValue.deletedItem) {
+    //         this.removeFromListview(returnValue.deletedItem._id);
+    //     }
+    // }
 
     deleteItem(item) {
         // this.crudops.delete(item._id).then(() => {
         //     this.removeFromListview(item._id);
         // });
-        item.delete().then(() => {
-            this.removeFromListview(item._id);
-        });
+        // item.delete().then(() => {
+        //     this.removeFromListview(item._id);
+        // });
     }
 
     editItem(item) {
@@ -155,15 +165,16 @@ export default class ListviewViewController extends mwf.ViewController {
             actionBindings: {
                 submitForm: ((event) => {
                     event.original.preventDefault();
-                    item.update().then(() => {
-                        this.updateInListview(item._id,item);
-                    });
-                    this.hideDialog();
-                }),
-                deleteItem: ((event) => {
-                    this.deleteItem(item);
+                    // item.update().then(() => {
+                    //     this.updateInListview(item._id,item);
+                    // });
                     this.hideDialog();
                 })
+                // ,
+                // deleteItem: ((event) => {
+                //     this.deleteItem(item);
+                //     this.hideDialog();
+                // })
             }
         });
     }
@@ -175,9 +186,9 @@ export default class ListviewViewController extends mwf.ViewController {
             actionBindings: {
                 submitForm: ((event) => {
                     event.original.preventDefault();
-                    newItem.create().then(() => {
-                        this.addToListview(newItem);
-                    });
+                    // newItem.create().then(() => {
+                    //     this.addToListview(newItem);
+                    // });
                     this.hideDialog();
                 })
             }
