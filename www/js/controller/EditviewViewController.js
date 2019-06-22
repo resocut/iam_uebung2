@@ -1,7 +1,7 @@
 import {mwf} from "../Main.js";
 import {entities} from "../Main.js";
 
-export default class extends mwf.ViewController {
+export default class EditviewViewController extends mwf.ViewController {
 
     constructor(){
         super();
@@ -12,8 +12,19 @@ export default class extends mwf.ViewController {
        * for any view: initialise the view
        */
     async oncreate() {
-        // TODO: do databinding, set listeners, initialise the view
 
+        this.mediaItem = new entities.MediaItem("lirem", "https://placeimg.com/150/300/culture");
+
+        this.bindElement("mediaEditviewTemplate", {item: this.mediaItem}, this.root);
+
+        console.log("....creating Edit View Controller..." + this.mediaItem.title + this.mediaItem.src);
+
+        // TODO: do databinding, set listeners, initialise the view
+        this.editForm = this.root.querySelector("main form");
+        // this.editForm.onsubmit = () =>{
+        //     alert("submitted");
+        //     return false;
+        // }
 
         // call the superclass once creation is done
         super.oncreate();
