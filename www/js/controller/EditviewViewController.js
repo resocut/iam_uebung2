@@ -13,7 +13,7 @@ export default class EditviewViewController extends mwf.ViewController {
        */
     async oncreate() {
 
-        this.mediaItem = new entities.MediaItem("lirem", "https://placeimg.com/150/300/culture");
+        this.mediaItem = new entities.MediaItem();
 
         this.bindElement("mediaEditviewTemplate", {item: this.mediaItem}, this.root);
 
@@ -21,10 +21,12 @@ export default class EditviewViewController extends mwf.ViewController {
 
         // TODO: do databinding, set listeners, initialise the view
         this.editForm = this.root.querySelector("main form");
-        // this.editForm.onsubmit = () =>{
-        //     alert("submitted");
-        //     return false;
-        // }
+        this.editForm.onsubmit = () =>{
+            alert("submitted! media Item: " + JSON.stringify(this.mediaItem));
+            
+            this.mediaItem.create().then(() => this.previousView());
+            return false;
+        }
 
         // call the superclass once creation is done
         super.oncreate();
