@@ -118,6 +118,7 @@ export default class ListviewViewController extends mwf.ViewController {
      */
     onListItemMenuItemSelected(option, listitem, listview) {
         // TODO: implement how selection of option for listitem shall be handled
+        super.onListItemMenuItemSelected(option, listitem, listview);
     }
 
     /*
