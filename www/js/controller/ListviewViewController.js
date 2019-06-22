@@ -145,6 +145,9 @@ export default class ListviewViewController extends mwf.ViewController {
             if (returnStatus == "created" && returnValue){
                 this.addToListview(returnValue.item)
             }
+            else if (returnStatus == "updated" && returnValue) {
+                this.updateInListview(returnValue.item._id, returnValue.item)
+            }
         }
     }
 

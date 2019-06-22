@@ -27,8 +27,13 @@ export default class EditviewViewController extends mwf.ViewController {
         this.editForm = this.root.querySelector("main form");
         this.editForm.onsubmit = () =>{
             alert("submitted! media Item: " + JSON.stringify(this.mediaItem));
+            //if mediaItem already exitst, then update
+            if (this.mediaItem.created) {
+                this.mediaItem.update().then(() => this.previousView({item:this.mediaItem},"updated"));
+            } else {
+                this.mediaItem.create().then(() => this.previousView({item:this.mediaItem},"created"));
+            }
 
-            this.mediaItem.create().then(() => this.previousView({item:this.mediaItem},"created"));
             return false;
         }
 
