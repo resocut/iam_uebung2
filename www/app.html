@@ -48,9 +48,12 @@
     <div class="mwf-template mwf-databind" data-mwf-templatename="mediaEditviewTemplate">
         <header>
             <button class="mwf-imgbutton mwf-left-align mwf-img-sandwich"></button>
-            <h1 class="mwf-left-align mwf-right-fill">{{#if item.created}}{{item.title}}{{else}}Neues Medium{{/if   }}</h1>
+            <h1 class="mwf-left-align mwf-right-fill">{{#if item.created}}{{item.title}}{{else}}Neues Medium{{/if}}</h1>
+
+            <!-- TODO Delete Funktion muss noch implemetiert werden Webkonferenz 11, 1:11h-->
+
             <button class="mwf-imgbutton mwf-right-align mwf-img-delete"></button>
-            <input type="submit" form="mediaEditForm" class="mwf-imgbutton mwf-right-align mwf-img-disk"></input>
+            <input type="submit" form="mediaEditForm" class="mwf-imgbutton mwf-right-align mwf-img-disk"/>
         </header>
         <main class="mwf-scrollview">
             <form id="mediaEditForm"> <!-- TODO: check why adding  class="mwf-material" leads to unwanted behaviour -->
@@ -110,7 +113,7 @@
             <input name="title" autocomplete="off" class="mwfautofocus" type="text" placeholder="Titel"
                    required="required" value="{{item.title}}"/>
             <div class="mwf-buttonbar">
-                <button class="mwf-left-align mwf-button" disabled="{{#unless item.created}}disabled{{/unless}}"type="button" on-click="deleteItem">Löschen</button>
+                <button class="mwf-left-align mwf-button" disabled="{{#unless item.created}}disabled{{/unless}}" type="button" on-click="deleteItem">Löschen</button>
                 <input class="mwf-button-prio mwf-right-align mwf-button" type="submit" value="{{#if item.created}}Ändern{{else}}Hinzufügen{{/if}}"/>
             </div>
         </form>
