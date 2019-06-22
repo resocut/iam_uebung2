@@ -44,15 +44,28 @@
     </footer>
 </div>
 <!-- FRM ESA 3-->
-<div class="mwf-view mwf-view-initial mwf-stylingmode" id="mediaEditView">
+<div class="mwf-view mwf-view-initial mwf-styling" data-mwf-viewcontroller="EditviewViewController" id="mediaEditView">
     <header>
         <button class="mwf-imgbutton mwf-left-align mwf-img-sandwich"></button>
         <h1 class="mwf-left-align mwf-right-fill">Neues Medium</h1>
         <button class="mwf-imgbutton mwf-right-align mwf-img-delete"></button>
-        <button class="mwf-imgbutton mwf-right-align mwf-img-disk"></button>
+        <input type="submit" form="mediaEditForm" class="mwf-imgbutton mwf-right-align mwf-img-disk"></input>
     </header>
     <main>
-
+        <form id="mediaEditForm">
+            <fieldset>
+                <legend>URL</legend>
+                <input type="url" name="url" placeholder="URL" required="required"/>
+            </fieldset>
+            <fieldset>
+                <legend>Titel</legend>
+                <input type="text" name="title" placeholder="Title" required="required"/>
+            </fieldset>
+            <fieldset>
+                <legend>Description</legend>
+                <textarea name="description" placeholder="Description"></textarea>
+            </fieldset>
+        </form>
     </main>
     <footer>
         <button class = "mwf-imgbutton mwf-left-align mwf-img-backward mwf-back"> </button>
