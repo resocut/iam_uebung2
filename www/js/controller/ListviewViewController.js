@@ -3,7 +3,7 @@
  */
 import {mwf} from "../Main.js";
 import {entities} from "../Main.js";
-// import {GenericCRUDImplLocal} from "../Main.js";
+import {GenericCRUDImplLocal} from "../Main.js";
 
 export default class ListviewViewController extends mwf.ViewController {
 
