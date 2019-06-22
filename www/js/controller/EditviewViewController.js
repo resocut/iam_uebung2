@@ -24,7 +24,11 @@ export default class EditviewViewController extends mwf.ViewController {
         console.log("....creating Edit View Controller..." + this.mediaItem.title + this.mediaItem.src);
 
         // TODO: do databinding, set listeners, initialise the view
+        this.previewImg = this.root.querySelector("main img");
         this.editForm = this.root.querySelector("main form");
+        this.urlInput = this.editForm.url;
+        this.urlInput.onblu = () => alert("BLUR!");
+
         this.editForm.onsubmit = () =>{
             alert("submitted! media Item: " + JSON.stringify(this.mediaItem));
             //if mediaItem already exitst, then update
