@@ -51,13 +51,15 @@ export default class ListviewViewController extends mwf.ViewController {
         //
         // );
 
-            this.createNewItem();
+            // this.createNewItem();
+            //
+            // this.addListener(new
+            // mwf.EventMatcher("crud","deleted","MediaItem"),((event) => {
+            //         this.removeFromListview(event.data);
+            //     })
+            // );
 
-            this.addListener(new
-            mwf.EventMatcher("crud","deleted","MediaItem"),((event) => {
-                    this.removeFromListview(event.data);
-                })
-            );
+            this.nextView("mediaEditView");
         });
 
         //Datenbank zurücksetzen
@@ -137,6 +139,11 @@ export default class ListviewViewController extends mwf.ViewController {
         if (subviewid == "mediaReadview" && returnValue &&
             returnValue.deletedItem) {
             this.removeFromListview(returnValue.deletedItem._id);
+        }
+        else if (subviewid == "mediaEditView"){
+            if (returnStatus == "created" && returnValue){
+                this.addToListview(returnValue.item)
+            }
         }
     }
 
