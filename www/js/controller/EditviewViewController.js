@@ -23,6 +23,14 @@ export default class EditviewViewController extends mwf.ViewController {
 
         console.log("....creating Edit View Controller..." + this.mediaItem.title + this.mediaItem.src);
 
+        this.viewProxy = this.bindElement("mediaEditviewTemplate",{item: this.mediaItem},this.root).viewProxy;
+        this.viewProxy.bindAction("deleteItem",(() => {
+            this.mediaItem.delete().then(() => {
+                this.notifyListeners(new mwf.Event("crud","deleted","MediaItem",this.mediaItem._id));
+                this.previousView({deletedItem:this.mediaItem});
+            })
+        }));
+
         // TODO: do databinding, set listeners, initialise the view
         this.previewImg = this.root.querySelector("main img");
         this.editForm = this.root.querySelector("main form");

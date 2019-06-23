@@ -157,6 +157,9 @@ export default class ListviewViewController extends mwf.ViewController {
             else if (returnStatus == "updated" && returnValue) {
                 this.updateInListview(returnValue.item._id, returnValue.item)
             }
+            else if (returnValue && returnValue.deletedItem){
+                this.removeFromListview(returnValue.deletedItem._id);
+            }
         }
     }
 
