@@ -35,24 +35,36 @@ export default class EditviewViewController extends mwf.ViewController {
         this.previewImg = this.root.querySelector("main img");
         this.editForm = this.root.querySelector("main form");
         this.urlInput = this.editForm.url;
+
+        this.fileInput = this.editForm.srcUpload;
+
         this.urlInput.onblur = () => {
             this.previewImg.src = this.urlInput.value;
         };
 
+        this.fileInput.onchange = () =>{
+            alert("selected image.");
+        }
+
         this.editForm.onsubmit = () =>{
-            alert("submitted! media Item: " + JSON.stringify(this.mediaItem));
-            //if mediaItem already exitst, then update
-            if (this.mediaItem.created) {
-                this.mediaItem.update().then(() => this.previousView({item:this.mediaItem},"updated"));
-            } else {
-                this.mediaItem.create().then(() => this.previousView({item:this.mediaItem},"created"));
-            }
+
+            this.createOrEditMediaItem();
 
             return false;
         }
 
+
         // call the superclass once creation is done
         super.oncreate();
+    }
+
+    createOrEditMediaItem(){
+        //if mediaItem already exitst, then update
+        if (this.mediaItem.created) {
+            this.mediaItem.update().then(() => this.previousView({item:this.mediaItem},"updated"));
+        } else {
+            this.mediaItem.create().then(() => this.previousView({item:this.mediaItem},"created"));
+        }
     }
 
     /*
