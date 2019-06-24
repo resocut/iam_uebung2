@@ -59,7 +59,9 @@
             <form id="mediaEditForm"> <!-- TODO: check why adding  class="mwf-material" leads to unwanted behaviour -->
                 <fieldset class="mwf-material">
                     <legend>URL</legend>
-                    <input type="url" name="url" required="required" value="{{item.src}}"/>
+                    <input type="text" name="url" required="required" value="{{item.src}}"/>
+                </fieldset>
+                <fieldset>
                     <input type="file" name="srcUpload"/>
                 </fieldset>
                 <img src="{{item.src}}"/>
