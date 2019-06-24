@@ -55,7 +55,6 @@ export default class EditviewViewController extends mwf.ViewController {
         this.editForm.onsubmit = () =>{
 
             if (this.fileInput.files[0]){
-                alert("upload");
                 var data = new FormData();
 
                 data.append("srcUpload",this.fileInput.files[0]);
@@ -63,6 +62,15 @@ export default class EditviewViewController extends mwf.ViewController {
                 var xhreq = new XMLHttpRequest();
                 xhreq.open("POST","api/upload");
                 xhreq.send(data);
+                xhreq.onreadystatechange = () => {
+                    if (xhreq.readyState == 4 && xhreq.status == 200){
+                        var responseData = JSON.parse(xhreq.responseText);
+
+                        this.mediaItem.src = responseData.data.srcUpload;
+
+                        this.createOrEditMediaItem();
+                    }
+                }
 
             }
             else{
