@@ -37,7 +37,14 @@
         <button class="mwf-imgbutton mwf-img-delete mwf-right-align" on-click="deleteItem"></button>
     </header>
     <main class="mwf-scrollview">
-        <img src="{{item.src}}"/>
+        {{#if item.mediaType == 'video'}}
+        <video src="{{#if item.created}}}{{item.src}}{{/if}}"></video>
+        {{else}}
+        <img src="{{#if item.created}}}{{item.src}}{{/if}}"/>
+        {{/if}}
+
+
+        <!-- <img src="{{item.src}}"/> -->
     </main>
     <footer>
         <button class="mwf-back mwf-imgbutton mwf-img-backward"></button>
@@ -63,7 +70,16 @@
                     <input type="file" class="mwf-material-altinput" accept="image/*,video/*" name="srcUpload" id="mediaItemSourceUpload"/>
                     <label class="mwf-material-altinput mwf-imgbutton mwf-img-camera" for="mediaItemSourceUpload"></label>
                 </fieldset>
-                <img src="{{item.src}}"/>
+                {{#if item.mediaType == 'video'}}
+                <video src="{{#if item.created}}}{{item.src}}{{/if}}"></video>
+                {{else}}
+                <img src="{{#if item.created}}}{{item.src}}{{/if}}"/>
+                {{/if}}
+
+
+
+
+                <!-- <img src="{{item.src}}"/> -->
                 <fieldset class="mwf-material">
                     <legend>Titel</legend>
                     <input type="text" name="title" required="required" value="{{item.title}}"/>
