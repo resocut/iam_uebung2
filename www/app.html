@@ -71,9 +71,9 @@
                     <label class="mwf-material-altinput mwf-imgbutton mwf-img-camera" for="mediaItemSourceUpload"></label>
                 </fieldset>
                 {{#if item.mediaType == 'video'}}
-                <video src="{{#if item.created}}}{{item.src}}{{/if}}"></video>
+                <video controls="controls" class="preview" src="{{#if item.created}}}{{item.src}}{{/if}}"></video>
                 {{else}}
-                <img src="{{#if item.created}}}{{item.src}}{{/if}}"/>
+                <img class="preview" src="{{#if item.created}}}{{item.src}}{{/if}}"/>
                 {{/if}}
 
 

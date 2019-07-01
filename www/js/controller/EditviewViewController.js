@@ -32,14 +32,15 @@ export default class EditviewViewController extends mwf.ViewController {
         }));
 
         // TODO: do databinding, set listeners, initialise the view
-        this.previewImg = this.root.querySelector("main img");
+        //this.preview = this.root.querySelector("main img, main video");
+        this.preview = this.root.querySelector("main .preview");
         this.editForm = this.root.querySelector("main form");
         this.urlInput = this.editForm.url;
 
         this.fileInput = this.editForm.srcUpload;
 
         this.urlInput.onblur = () => {
-            this.previewImg.src = this.urlInput.value;
+            this.preview.src = this.urlInput.value;
         };
 
         this.fileInput.onchange = () =>{
@@ -51,15 +52,17 @@ export default class EditviewViewController extends mwf.ViewController {
 
 
 
-                    this.previewImg.src = previewurl;
+
                     this.mediaItem.src = previewurl;
                     this.mediaItem.contentType = contentType;
 
-                    alert ("contentType: " + this.mediaItem.contentType + " - " + this.mediaItem.mediaType);
+                    //alert ("contentType: " + this.mediaItem.contentType + " - " + this.mediaItem.mediaType);
 
                     console.log("mediaItem: ", this.mediaItem);
 
                     this.viewProxy.update({item:this.mediaItem});
+                    this.preview = this.root.querySelector("main .preview");
+                    this.preview.src = previewurl;
                 //}
 
                 //reader.readAsDataURL(this.fileInput.files[0]);
@@ -99,6 +102,15 @@ export default class EditviewViewController extends mwf.ViewController {
 
         // call the superclass once creation is done
         super.oncreate();
+    }
+
+    async onpause() {
+
+        if (this.preview && this.preview.tagName == "VIDEO" && !this.preview.paused && !this.preview.ended) {
+            this.preview.pause();
+        }
+
+        super.onpause();
     }
 
     createOrEditMediaItem(){
