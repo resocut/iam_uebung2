@@ -44,11 +44,23 @@ export default class EditviewViewController extends mwf.ViewController {
 
         this.fileInput.onchange = () =>{
             if (this.fileInput.files[0]){
-                var objecturl = URL.createObjectURL(this.fileInput.files[0]);
-                this.previewImg.src = objecturl;
-                // this.urlInput.value = objecturl;
-                this.mediaItem.src = objecturl;
-                this.viewProxy.update({item:this.mediaItem});
+                var previewurl;
+                var previewurl = URL.createObjectURL(this.fileInput.files[0]);
+                // var reader = new FileReader();
+                // reader.onload = () => {
+                //     previewurl = reader.result;
+                    this.previewImg.src = previewurl;
+                    // this.urlInput.value = objecturl;
+                    this.mediaItem.src = previewurl;
+
+                    console.log("mediaItem: ", this.mediaItem);
+
+                    this.viewProxy.update({item:this.mediaItem});
+                //}
+
+                //reader.readAsDataURL(this.fileInput.files[0]);
+
+
             }
         }
 
