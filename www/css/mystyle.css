@@ -1,5 +1,11 @@
 /* TODO: add any application specific styling here */
 
+/*not working as of now*/
+#mediaReadview img {
+    width: 100%;
+    max-width: 100%
+}
+
 #mediaOverview main ul li img {
     object-fit: cover;
 }
@@ -12,10 +18,3 @@
     width: 100%;
     margin-left: 13px;
 }
-
-/*not working as of now*/
-#mediaReadview img {
-    width: 100%;
-    max-width: 100%
-}
-
