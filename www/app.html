@@ -71,9 +71,9 @@
                     <label class="mwf-material-altinput mwf-imgbutton mwf-img-camera" for="mediaItemSourceUpload"></label>
                 </fieldset>
                 {{#if item.mediaType == 'video'}}
-                <video controls="controls" class="preview" src="{{#if item.created}}}{{item.src}}{{/if}}"></video>
+                <video controls="controls" class="preview" src="{{#if item.created}}{{item.src}}{{/if}}"></video>
                 {{else}}
-                <img class="preview" src="{{#if item.created}}}{{item.src}}{{/if}}"/>
+                <img class="preview" src="{{#if item.created}}{{item.src}}{{/if}}"/>
                 {{/if}}
 
 
@@ -108,8 +108,14 @@
     <main class="mwf-scrollview">
         <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="mediaItemMenu">
             <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind" data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
-                <img class="mwf-left-align" src="{{src}}"/>
 
+
+
+                {{#if mediaType == 'video'}}
+                <video class="preview videopre" src="{{src}}"/></video>
+                {{else}}
+                <img class="preview" src="{{src}}"/>
+                {{/if}}
                 <div class="mwf-li-titleblock mwf-right-fill">
                     <h2>{{title}}{{_id}}</h2>
                     <h3>{{addedDateString}}</h3>

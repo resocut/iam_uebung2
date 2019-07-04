@@ -19,3 +19,13 @@
     max-width: 100%
 }
 
+.videopre {
+    width: 50px;
+    max-height: 50px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#mediaOverview main ul li video {
+    object-fit: cover;
+}
