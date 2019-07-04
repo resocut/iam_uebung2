@@ -1,3 +1,7 @@
 # Exercise 2, rebuild app with mfw framework
 
 You can find all inormation in the PDF: iam_tutorial_s19_190212
+
+*******
+KNOWN BUGS: 
+* resetting the database with the burgermenu does not reload the listview, so there is no visual confirmation of the action
