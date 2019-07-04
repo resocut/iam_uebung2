@@ -29,3 +29,15 @@
 #mediaOverview main ul li video {
     object-fit: cover;
 }
+
+#mediaEditView main video {
+    width: 90%;
+    margin-left: 13px;
+}
+
+
+
+video {
+    width: 98%;
+    margin-left: 8px;
+}

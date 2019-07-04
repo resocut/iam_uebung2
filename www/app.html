@@ -32,7 +32,7 @@
     </header>
     <main class="mwf-scrollview">
         {{#if item.mediaType == 'video'}}
-        <video src="{{#if item.created}}{{item.src}}{{/if}}"></video>
+        <video controls="controls" class="preview"  src="{{#if item.created}}{{item.src}}{{/if}}"></video>
         {{else}}
         <img src="{{#if item.created}}{{item.src}}{{/if}}"/>
         {{/if}}
