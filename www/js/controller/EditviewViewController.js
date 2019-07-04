@@ -32,14 +32,16 @@ export default class EditviewViewController extends mwf.ViewController {
         }));
 
         // TODO: do databinding, set listeners, initialise the view
-        this.previewImg = this.root.querySelector("main img");
+        // this.previewImg = this.root.querySelector("main img");
+        this.preview = this.root.querySelector("main .preview");
         this.editForm = this.root.querySelector("main form");
         this.urlInput = this.editForm.url;
 
         this.fileInput = this.editForm.srcUpload;
 
         this.urlInput.onblur = () => {
-            this.previewImg.src = this.urlInput.value;
+            // this.previewImg.src = this.urlInput.value;
+            this.preview.src = this.urlInput.value;
         };
 
         this.fileInput.onchange = () =>{
@@ -54,7 +56,9 @@ export default class EditviewViewController extends mwf.ViewController {
                 // This is not working. no contentType or mediaType is ever set. -> the if else statement in the app.html can never work.
 
                 var previewUrl = URL.createObjectURL(this.fileInput.files[0]);
-                this.previewImg.src = previewUrl;
+                // this.previewImg.src = previewUrl;
+                this.preview = this.root.querySelector("main .preview");
+                this.preview.src = previewurl;
                 this.mediaItem.src = previewUrl;
                 this.mediaItem.contentType = contentType;
                 this.viewProxy.update({item:this.mediaItem});
@@ -145,5 +149,13 @@ export default class EditviewViewController extends mwf.ViewController {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
     }
 
+    async onpause() {
+
+        if (this.preview && this.preview.tagName == "VIDEO" && !this.preview.paused && !this.preview.ended) {
+            this.preview.pause();
+        }
+
+        super.onpause();
+    }
 }
 
