@@ -38,6 +38,15 @@
     </header>
     <main class="mwf-scrollview">
         <img src="{{item.src}}"/>
+
+        <!-- outcommented because no mediaType is given, also "created" is not existing, should be "added" -->
+        <!--
+        {{#if item.mediaType == 'video'}}
+        <video src="{{#if item.created}}}{{item.src}}{{/if}}"></video>
+        {{else}}
+        <img src="{{#if item.created}}}{{item.src}}{{/if}}"/>
+        {{/if}} -->
+
     </main>
     <footer>
         <button class="mwf-back mwf-imgbutton mwf-img-backward"></button>
@@ -60,28 +69,38 @@
                 <fieldset class="mwf-material">
                     <legend>URL</legend>
                     <input type="text" pattern="http://.*|https://.*|blob:.*|content/.*" name="url" required="required" class="mwf-material-altinput-target" value="{{item.src}}"/>
-                    <input type="file" class="mwf-material-altinput" name="srcUpload" id="mediaItemSourceUpload"/>
+                    <input type="file" class="mwf-material-altinput" accept="image/*,video/*" name="srcUpload" id="mediaItemSourceUpload"/>
                     <label class="mwf-material-altinput mwf-imgbutton mwf-img-camera" for="mediaItemSourceUpload"></label>
                 </fieldset>
                 <img src="{{item.src}}"/>
-                <fieldset class="mwf-material">
-                    <legend>Titel</legend>
-                    <input type="text" name="title" required="required" value="{{item.title}}"/>
-                </fieldset>
-                <fieldset class="mwf-material">
-                    <legend>Description</legend>
-                    <textarea name="description" value="{{item.description}}"></textarea>
-                </fieldset>
-            </form>
-        </main>
-        <footer>
-            <button class = "mwf-imgbutton mwf-left-align mwf-img-backward mwf-back"> </button>
-        </footer>
-    </div>
-</div>
+
+                <!-- outcommented because no mediaType is given, also "created" is not existing, should be "added" -->
+                <!--
+                        {{#if item.mediaType == 'video'}}
+                        <video controls="controls" class="preview" src="{{#if item.created}}}{{item.src}}{{/if}}"></video>
+                        {{else}}
+                        <img class="preview" src="{{#if item.created}}}{{item.src}}{{/if}}"/>
+                        {{/if}}
+                        -->
+
+                    <fieldset class="mwf-material">
+                        <legend>Titel</legend>
+                        <input type="text" name="title" required="required" value="{{item.title}}"/>
+                    </fieldset>
+                    <fieldset class="mwf-material">
+                        <legend>Description</legend>
+                        <textarea name="description" value="{{item.description}}"></textarea>
+                    </fieldset>
+                    </form>
+                </main>
+                <footer>
+                    <button class = "mwf-imgbutton mwf-left-align mwf-img-backward mwf-back"> </button>
+                </footer>
+            </div>
+        </div>
 
 
-<!-- TODO-REPEATED: add new views here -->
+        <!-- TODO-REPEATED: add new views here -->
 <div class="mwf-view mwf-view-initial" id="mediaOverview" data-mwf-viewcontroller="ListviewViewController"> <!-- TODO: set this back as initial! -->
 <!--    <div class="mwf-view mwf-view-initial mwf-styling" id="mediaOverview" data-mwf-viewcontroller="ListviewViewController">-->
     <header>

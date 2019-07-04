@@ -43,11 +43,20 @@ export default class EditviewViewController extends mwf.ViewController {
         };
 
         this.fileInput.onchange = () =>{
+            console.log("changing file....");
             if (this.fileInput.files[0]){
-                var objecturl = URL.createObjectURL(this.fileInput.files[0]);
-                this.previewImg.src = objecturl;
-                // this.urlInput.value = objecturl;
-                this.mediaItem.src = objecturl;
+                // var objecturl = URL.createObjectURL(this.fileInput.files[0]);
+                // this.previewImg.src = objecturl;
+                // this.mediaItem.src = objecturl;
+                // this.viewProxy.update({item:this.mediaItem});
+
+                var contentType = this.fileInput.files[0].type;
+                // This is not working. no contentType or mediaType is ever set. -> the if else statement in the app.html can never work.
+
+                var previewUrl = URL.createObjectURL(this.fileInput.files[0]);
+                this.previewImg.src = previewUrl;
+                this.mediaItem.src = previewUrl;
+                this.mediaItem.contentType = contentType;
                 this.viewProxy.update({item:this.mediaItem});
             }
         }
