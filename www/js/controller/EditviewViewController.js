@@ -1,126 +1,98 @@
-import {mwf} from "../Main.js";
-import {entities} from "../Main.js";
-
+import { mwf } from "../Main.js";
+import { entities } from "../Main.js";
 export default class EditviewViewController extends mwf.ViewController {
-
-    constructor(){
+    constructor() {
         super();
-
         console.log("EditviewViewController()");
     }
     /*
-       * for any view: initialise the view
-       *
-       * In case of editing an existing item
-       *
-       *
-       */
+     * for any view: initialise the view
+     *
+     * In case of editing an existing item
+     *
+     *
+     */
     async oncreate() {
-
         this.mediaItem = (this.args && this.args.item) ? this.args.item : new entities.MediaItem();
-
-        this.bindElement("mediaEditviewTemplate", {item: this.mediaItem}, this.root);
-
+        this.bindElement("mediaEditviewTemplate", {
+            item: this.mediaItem
+        }, this.root);
         console.log("....creating Edit View Controller..." + this.mediaItem.title + this.mediaItem.src);
-
-        this.viewProxy = this.bindElement("mediaEditviewTemplate",{item: this.mediaItem},this.root).viewProxy;
-        this.viewProxy.bindAction("deleteItem",(() => {
-            this.mediaItem.delete().then(() => {
-                this.notifyListeners(new mwf.Event("crud","deleted","MediaItem",this.mediaItem._id));
-                this.previousView({deletedItem:this.mediaItem});
-            })
+        this.viewProxy = this.bindElement("mediaEditviewTemplate", {
+            item: this.mediaItem
+        }, this.root)
+            .viewProxy;
+        this.viewProxy.bindAction("deleteItem", (() => {
+            this.mediaItem.delete()
+                .then(() => {
+                    this.notifyListeners(new mwf.Event("crud", "deleted", "MediaItem", this.mediaItem._id));
+                    this.previousView({
+                        deletedItem: this.mediaItem
+                    });
+                })
         }));
-
-        // TODO: do databinding, set listeners, initialise the view
-        //this.preview = this.root.querySelector("main img, main video");
         this.preview = this.root.querySelector("main .preview");
         this.editForm = this.root.querySelector("main form");
         this.urlInput = this.editForm.url;
-
         this.fileInput = this.editForm.srcUpload;
-
         this.urlInput.onblur = () => {
             this.preview.src = this.urlInput.value;
         };
-
-        this.fileInput.onchange = () =>{
-            if (this.fileInput.files[0]){
-                var previewurl;
+        this.fileInput.onchange = () => {
+            if (this.fileInput.files[0]) {
                 var previewurl = URL.createObjectURL(this.fileInput.files[0]);
-
                 var contentType = this.fileInput.files[0].type;
-
-
-
-
-                    this.mediaItem.src = previewurl;
-                    this.mediaItem.contentType = contentType;
-
-                    //alert ("contentType: " + this.mediaItem.contentType + " - " + this.mediaItem.mediaType);
-
-                    console.log("mediaItem: ", this.mediaItem);
-
-                    this.viewProxy.update({item:this.mediaItem});
-                    this.preview = this.root.querySelector("main .preview");
-                    this.preview.src = previewurl;
-                //}
-
-                //reader.readAsDataURL(this.fileInput.files[0]);
-
-
+                this.mediaItem.src = previewurl;
+                this.mediaItem.contentType = contentType;
+                console.log("mediaItem: ", this.mediaItem);
+                this.viewProxy.update({
+                    item: this.mediaItem
+                });
+                this.preview = this.root.querySelector("main .preview");
+                this.preview.src = previewurl;
             }
         }
-
-        this.editForm.onsubmit = () =>{
-
-            if (this.fileInput.files[0]){
+        this.editForm.onsubmit = () => {
+            if (this.fileInput.files[0]) {
                 var data = new FormData();
-
-                data.append("srcUpload",this.fileInput.files[0]);
-
+                data.append("srcUpload", this.fileInput.files[0]);
                 var xhreq = new XMLHttpRequest();
-                xhreq.open("POST","api/upload");
+                xhreq.open("POST", "api/upload");
                 xhreq.send(data);
                 xhreq.onreadystatechange = () => {
-                    if (xhreq.readyState == 4 && xhreq.status == 200){
+                    if (xhreq.readyState == 4 && xhreq.status == 200) {
                         var responseData = JSON.parse(xhreq.responseText);
-
                         this.mediaItem.src = responseData.data.srcUpload;
-
                         this.createOrEditMediaItem();
                     }
                 }
-
-            }
-            else{
+            } else {
                 this.createOrEditMediaItem();
             }
-
             return false;
         }
-
-
-        // call the superclass once creation is done
         super.oncreate();
     }
-
     async onpause() {
-
         if (this.preview && this.preview.tagName == "VIDEO" && !this.preview.paused && !this.preview.ended) {
             this.preview.pause();
         }
-
         super.onpause();
     }
-
-    createOrEditMediaItem(){
-        //if mediaItem already exitst, then update
+    createOrEditMediaItem() {
         if (this.mediaItem.created) {
-            this.mediaItem.update().then(() => this.previousView({item:this.mediaItem},"updated"));
+            this.mediaItem.update()
+                .then(() => this.previousView({
+                    item: this.mediaItem
+                }, "updated"));
         } else {
-            this.mediaItem.create().then(() => this.previousView({item:this.mediaItem},"created"));
+            this.mediaItem.create()
+                .then(() => this.previousView({
+                    item: this.mediaItem
+                }, "created"));
         }
     }
+
 
     /*
      * for views with listviews: bind a list item to an item view
@@ -129,7 +101,6 @@ export default class EditviewViewController extends mwf.ViewController {
     bindListItemView(viewid, itemview, item) {
         // TODO: implement how attributes of item shall be displayed in itemview
     }
-
     /*
      * for views with listviews: react to the selection of a listitem
      * TODO: delete if no listview is used or if item selection is specified by targetview/targetaction
@@ -137,7 +108,6 @@ export default class EditviewViewController extends mwf.ViewController {
     onListItemSelected(listitem, listview) {
         // TODO: implement how selection of listitem shall be handled
     }
-
     /*
      * for views with listviews: react to the selection of a listitem menu option
      * TODO: delete if no listview is used or if item selection is specified by targetview/targetaction
@@ -145,7 +115,6 @@ export default class EditviewViewController extends mwf.ViewController {
     onListItemMenuItemSelected(option, listitem, listview) {
         // TODO: implement how selection of option for listitem shall be handled
     }
-
     /*
      * for views with dialogs
      * TODO: delete if no dialogs are used or if generic controller for dialogs is employed
@@ -153,16 +122,12 @@ export default class EditviewViewController extends mwf.ViewController {
     bindDialog(dialogid, dialog, item) {
         // call the supertype function
         super.bindDialog(dialogid, dialog, item);
-
         // TODO: implement action bindings for dialog, accessing dialog.root
     }
-
     /*
      * for views that initiate transitions to other views
      */
     async onReturnFromSubview(subviewid, returnValue, returnStatus) {
         // TODO: check from which view, and possibly with which status, we are returning, and handle returnValue accordingly
     }
-
 }
-
