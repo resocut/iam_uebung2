@@ -7,7 +7,6 @@ export default class ListviewViewController extends mwf.ViewController {
     constructor() {
         super();
         this.resetDatabaseElement = null;
-        this.detail = this.root.querySelector("main .detail");
         console.log("ListviewViewController()");
         this.items = [
             new

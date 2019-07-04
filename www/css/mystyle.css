@@ -5,11 +5,12 @@
 }
 
 #mediaReadview main img {
-    width: 100%;
+    width: 97%;
+    margin-left: 12px;
 }
 
 #mediaEditView main video {
-    width: 100%;
+    width: 97%;
     margin-left: 13px;
 }
 
@@ -35,9 +36,13 @@
     margin-left: 13px;
 }
 
-
-
 video {
     width: 98%;
     margin-left: 8px;
+}
+
+img {
+    border: 0;
+    width: 97%;
+    margin-left: 12px;
 }
