@@ -20,7 +20,6 @@ export default class ListviewViewController extends mwf.ViewController {
      * for any view: initialise the view
      */
     async oncreate() {
-        // TODO: do databinding, set listeners, initialise the view
         //New element with plus Button
         this.addNewMediaItemElement = this.root.querySelector("#addNewMediaItem");
         this.addNewMediaItemElement.onclick = (() => {
@@ -30,7 +29,20 @@ export default class ListviewViewController extends mwf.ViewController {
         this.resetDatabaseElement = this.root.querySelector("#resetDatabase");
         this.resetDatabaseElement.onclick = (() => {
             if (confirm("Soll die Datenbank wirklich zurückgesetzt werden?")) {
-                indexedDB.deleteDatabase("mwftutdb");
+                console.log("creating request to delete database...");
+                var DBDeleteRequest = indexedDB.deleteDatabase("toDoList");
+
+                DBDeleteRequest.onerror = function(event) {
+                    console.log("Error deleting database.");
+                };
+
+                DBDeleteRequest.onsuccess = function(event) {
+                    console.log("Database deleted successfully.");
+                    console.log(event.result);
+                    /*
+                     * TODO: update listview after database deletion *
+                     */
+                };
             }
         });
         entities.MediaItem.readAll()
