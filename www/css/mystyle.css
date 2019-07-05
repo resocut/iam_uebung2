@@ -1,5 +1,9 @@
 /* TODO: add any application specific styling here */
 
+:root {
+    --video-icon-width: 10px;
+}
+
 #mediaOverview main ul li img {
     object-fit: cover;
 }
@@ -25,6 +29,7 @@
     max-height: 50px;
     margin: 0px;
     padding: 0px;
+    margin-left: -10px;
 }
 
 #mediaOverview main ul li video {
@@ -45,4 +50,14 @@ img {
     border: 0;
     width: 97%;
     margin-left: 12px;
+}
+
+.videoicon {
+    width: var(--video-icon-width);
+    height: 10px;
+    filter: invert(1);
+    position: relative;
+    top: 40px;
+    left: 2px;
+    bottom: 2px;
 }

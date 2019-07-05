@@ -96,7 +96,8 @@
         <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="mediaItemMenu">
             <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind" data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
                 {{#if mediaType == 'video'}}
-                <video class="preview videopre" src="{{src}}"/></video>
+                    <img class="videoicon" src="lib/css/img/glyphicons/png/glyphicons-221-play-button.png"/>
+                    <video class="preview videopre" src="{{src}}"/></video>
                 {{else}}
                 <img class="preview" src="{{src}}"/>
                 {{/if}}
