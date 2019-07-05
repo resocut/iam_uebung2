@@ -5,4 +5,4 @@ You can find all inormation in the PDF: iam_tutorial_s19_190212
 *******
 KNOWN BUGS: 
 * resetting the database with the burgermenu does not reload the listview, so there is no visual confirmation of the action
-* EditviewViewController(53): items do not have a mediaType or a contentType. The if-else statement in the app.html (42 and 77) will fail and show an empty screen, therefor they have been outcommented.
+* reloading button has just a logfunction
