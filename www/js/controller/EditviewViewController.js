@@ -15,6 +15,7 @@ export default class EditviewViewController extends mwf.ViewController {
      */
     async oncreate() {
         this.mediaItem = (this.args && this.args.item) ? this.args.item : new entities.MediaItem();
+        console.log("Obacht: MediaItem is: " , this.mediaItem);
         this.bindElement("mediaEditviewTemplate", {
             item: this.mediaItem
         }, this.root);

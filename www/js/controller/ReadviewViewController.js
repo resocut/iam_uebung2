@@ -16,8 +16,6 @@ export default class ReadviewViewController extends mwf.ViewController {
      * for any view: initialise the view
      */
     async oncreate() {
-        // TODO: do databinding, set listeners, initialise the view
-        // var mediaItem = new entities.MediaItem("m","https://placeimg.com/300/400/music");
         var mediaItem = this.args.item;
         this.viewProxy = this.bindElement("mediaReadviewTemplate",{item: mediaItem},this.root).viewProxy;
         this.viewProxy.bindAction("deleteItem",(() => {
@@ -25,6 +23,9 @@ export default class ReadviewViewController extends mwf.ViewController {
                 this.notifyListeners(new mwf.Event("crud","deleted","MediaItem",mediaItem._id));
                 this.previousView({deletedItem:mediaItem});
             })
+        }));
+        this.viewProxy.bindAction("editItem", (() => {
+            this.nextView("mediaEditView", this.args);
         }));
 
         // call the superclass once creation is done
