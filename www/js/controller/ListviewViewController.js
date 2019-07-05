@@ -27,6 +27,11 @@ export default class ListviewViewController extends mwf.ViewController {
         this.addNewMediaItemElement.onclick = (() => {
             this.nextView("mediaEditView");
         });
+        this.reloadLibraryItem = this.root.querySelector("#reloadLibraryItem");
+        this.reloadLibraryItem.onclick = (() => {
+            console.log("Reload clicked...");
+            this.reloadLibrary();
+        });
         //Datenbank zurücksetzen
         this.resetDatabaseElement = this.root.querySelector("#resetDatabase");
         this.resetDatabaseElement.onclick = (() => {
@@ -39,8 +44,9 @@ export default class ListviewViewController extends mwf.ViewController {
                 DBDeleteRequest.onsuccess = function(event) {
                     console.log("Database deleted successfully.");
                     console.log(event.result);
+
                     /*
-                     * TODO: update listview after database deletion *
+                    TODO: remove entries from listview
                      */
                 };
             }
@@ -51,6 +57,12 @@ export default class ListviewViewController extends mwf.ViewController {
             });
         // call the superclass once creation is done
         super.oncreate();
+    }
+
+    reloadLibrary() {
+        for (var item in this.items){
+            console.log("Item is: ", item);
+        }
     }
     /*
      * for views with listviews: bind a list item to an item view
