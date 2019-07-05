@@ -8,14 +8,14 @@ export default class ListviewViewController extends mwf.ViewController {
         super();
         this.resetDatabaseElement = null;
         console.log("ListviewViewController()");
-        this.items = [
-            new
-            entities.MediaItem("m1", "https://placeimg.com/100/100/music"),
-            new
-            entities.MediaItem("m2", "https://placeimg.com/200/150/arch"),
-            new
-            entities.MediaItem("m3", "https://placeimg.com/300/300/nature"),
-        ];
+        // this.items = [
+        //     new
+        //     entities.MediaItem("m1", "https://placeimg.com/100/100/music"),
+        //     new
+        //     entities.MediaItem("m2", "https://placeimg.com/200/150/arch"),
+        //     new
+        //     entities.MediaItem("m3", "https://placeimg.com/300/300/nature"),
+        // ];
         this.addNewMediaItem = null;
     }
     /*
